@@ -133,6 +133,9 @@ void update_model(Model* model,char *user_input) {
                 break;
             }
             char* discriminating_question_for_learning = concatenate_strings(1,user_input);
+
+            free(model->discriminating_question_for_learning);
+
             model->discriminating_question_for_learning = discriminating_question_for_learning;
             model->message_from_engine=concatenate_strings(7,"what is the answer to the question '",
                 discriminating_question_for_learning,
@@ -180,7 +183,7 @@ Model* get_initial_model() {
     Model* to_return = malloc(sizeof(Model));
     // to_return->message_from_engine = malloc(strlen(WELCOME_MESSAGE));
     // strcpy(to_return->message_from_engine,WELCOME_MESSAGE);
-
+    to_return->discriminating_question_for_learning = concatenate_strings(1,WELCOME_MESSAGE);
     to_return->message_from_engine= concatenate_strings(1,WELCOME_MESSAGE);
     to_return->state=THINK_ABOUT_AN_ANIMAL_STATE;
     to_return->animal_to_be_learned=concatenate_strings(1,"");
