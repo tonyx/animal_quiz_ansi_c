@@ -64,7 +64,9 @@ int main(int argc, char **argv) {
 void update_model(Model* model,char *user_input) {
     switch (model->state) {
         case THINK_ABOUT_AN_ANIMAL_STATE:
+
             free(model->message_from_engine);
+
             model->message_from_engine = concatenate_strings(1,THINK_ABOUT_AN_ANIMAL_MESSAGE);
             model->current_node = model->knowledge_tree;
             model->state=GUESSING_STATE;
@@ -75,13 +77,16 @@ void update_model(Model* model,char *user_input) {
                 model->message_from_engine = concatenate_strings(3,"is it a ",(model->current_node)->animal,"?");
                 model->state = CHECKING_GUESS_IN_LEAF_NODE_STATE;
             } else {
+                free(model->message_from_engine);
                 model->message_from_engine = concatenate_strings(1,model->current_node->discriminating_question);
                 model->state = CHECKING_GUESS_IN_NON_LEAF_NODE_STATE;
             }
             break;
         case CHECKING_GUESS_IN_LEAF_NODE_STATE:
             if (strcmp("yes",user_input)==0) {
+
                 free(model->message_from_engine);
+
                 model->message_from_engine = concatenate_strings(1,"yeah");
                 model->state=THINK_ABOUT_AN_ANIMAL_STATE;
             } else if (strcmp("no",user_input)==0) {
@@ -98,10 +103,13 @@ void update_model(Model* model,char *user_input) {
             } else if (strcmp("no",user_input)==0) {
                 model->father_of_current_node = &model->current_node; 
                 model->current_node= (model->current_node)->no_branch;
-            }
+            } else 
+                break;
 
            if (((model->current_node))->leaf_or_not_leaf==IS_LEAF) {
+
                 free(model->message_from_engine);
+
                 model->message_from_engine = concatenate_strings(3,"is it a ",(model->current_node)->animal,"?");
                 model->state = CHECKING_GUESS_IN_LEAF_NODE_STATE;
             } else {
@@ -170,10 +178,12 @@ void update_model(Model* model,char *user_input) {
 
 Model* get_initial_model() {
     Model* to_return = malloc(sizeof(Model));
-    to_return->message_from_engine = malloc(strlen(WELCOME_MESSAGE));
-    strcpy(to_return->message_from_engine,WELCOME_MESSAGE);
+    // to_return->message_from_engine = malloc(strlen(WELCOME_MESSAGE));
+    // strcpy(to_return->message_from_engine,WELCOME_MESSAGE);
+
+    to_return->message_from_engine= concatenate_strings(1,WELCOME_MESSAGE);
     to_return->state=THINK_ABOUT_AN_ANIMAL_STATE;
-    to_return->animal_to_be_learned="";
+    to_return->animal_to_be_learned=concatenate_strings(1,"");
     to_return->knowledge_tree=get_initial_tree();
     to_return->current_node=to_return->knowledge_tree;
     to_return->father_of_current_node = &to_return->knowledge_tree;
