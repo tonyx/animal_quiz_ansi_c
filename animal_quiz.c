@@ -74,7 +74,6 @@ void update_model(Model* model,char *user_input) {
             free(model->message_from_engine);
             model->message_from_engine = concatenate_strings(1,THINK_ABOUT_AN_ANIMAL_MESSAGE);
             model->current_node = model->knowledge_tree;
-
             model->state=GUESSING_STATE;
             break;
         case GUESSING_STATE:
@@ -90,17 +89,13 @@ void update_model(Model* model,char *user_input) {
             break;
         case CHECKING_GUESS_IN_LEAF_NODE_STATE:
             if (strcmp("yes",user_input)==0) {
-
                 free(model->message_from_engine);
-
                 model->message_from_engine = concatenate_strings(1,"yeah");
                 model->state=THINK_ABOUT_AN_ANIMAL_STATE;
             } else if (strcmp("no",user_input)==0) {
                 free(model->message_from_engine);
                 model->message_from_engine = concatenate_strings(1,"what animal was?");
                 model->state = GETTING_ANIMAL_NAME_STATE;
-
-
             }
             break;
 
@@ -108,7 +103,6 @@ void update_model(Model* model,char *user_input) {
             if (strcmp("yes",user_input)==0) {
                 model->current_node= (model->current_node)->yes_branch;
                 add_element_to_list(&model->yes_no_list,"yes");
-                
             } else if (strcmp("no",user_input)==0) {
                 model->current_node= (model->current_node)->no_branch;
                 add_element_to_list(&model->yes_no_list,"no");
@@ -116,9 +110,7 @@ void update_model(Model* model,char *user_input) {
                 break;
 
            if (((model->current_node))->leaf_or_not_leaf==IS_LEAF) {
-
                 free(model->message_from_engine);
-
                 model->message_from_engine = concatenate_strings(3,"is it a ",(model->current_node)->animal,"?");
                 model->state = CHECKING_GUESS_IN_LEAF_NODE_STATE;
             } else {
@@ -142,9 +134,7 @@ void update_model(Model* model,char *user_input) {
                 break;
             }
             char* discriminating_question_for_learning = concatenate_strings(1,user_input);
-
             free(model->discriminating_question_for_learning);
-
             model->discriminating_question_for_learning = discriminating_question_for_learning;
             model->message_from_engine=concatenate_strings(7,"what is the answer to the question '",
                 discriminating_question_for_learning,
@@ -178,7 +168,6 @@ Model* get_initial_model() {
     to_return->animal_to_be_learned=concatenate_strings(1,"");
     to_return->knowledge_tree=get_initial_tree();
     to_return->current_node=to_return->knowledge_tree;
-    // to_return->father_of_current_node = &to_return->knowledge_tree;
     return to_return;
 }
 
