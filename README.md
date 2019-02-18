@@ -11,8 +11,8 @@ welcome
 
 think about an animal
 
-is it a elephant?
-no
+is it a elephant\
+no\
 what animal was?
 cat
 what is the question to distinguish a cat from a elephant?
