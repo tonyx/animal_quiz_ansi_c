@@ -41,8 +41,8 @@ typedef struct Model {
 
 } Model;
 
-Model* get_initial_model();
-Knowledge_tree* get_initial_tree();
+Model* get_initial_model(void);
+Knowledge_tree* get_initial_tree(void);
 void update_model(Model* model,char * user_input);
 Knowledge_tree* make_leaf_node(char* animal);
 Knowledge_tree* make_non_leaf_node(char* discriminating_question,Knowledge_tree* yes_branch,Knowledge_tree* no_branch);
@@ -207,7 +207,6 @@ void rearrange_knowledge_tree(Str_list* yes_no_list,Knowledge_tree* tree,char* n
         }
     } else {
         if (strcmp(yes_no_list->element,"no")==0) {
-            char* old_animal_name = tree->no_branch->animal;
             rearrange_knowledge_tree(yes_no_list->next,tree->no_branch,
                 new_discriminating_question,answer_to_new_discriminating_question,new_animal_name);
         } else {
