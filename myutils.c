@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdarg.h>
-#include "mystringutils.h"
+#include "myutils.h"
 #endif 
 #define STDIO_INCLUDED
 
