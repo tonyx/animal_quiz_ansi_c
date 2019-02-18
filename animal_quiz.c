@@ -56,7 +56,7 @@ void huge_set_model(Model* model);
 int main(int argc, char **argv) {
     char user_input[97];
     Model * model = get_initial_model();
-    // huge_set_model(model); // proloading a knowldge tre
+    // huge_set_model(model); // loading a prepopulatd knowldge tree, for tests, if needed
     while(1) {
         printf("%s\n",model->message_from_engine);
         get_user_input(user_input);
@@ -70,7 +70,6 @@ int main(int argc, char **argv) {
 void update_model(Model* model,char *user_input) {
     switch (model->state) {
         case THINK_ABOUT_AN_ANIMAL_STATE:
-
             free(model->message_from_engine);
             model->message_from_engine = concatenate_strings(1,THINK_ABOUT_AN_ANIMAL_MESSAGE);
             model->current_node = model->knowledge_tree;
@@ -129,6 +128,7 @@ void update_model(Model* model,char *user_input) {
                    (model->current_node)->animal,"?");
             model->state = GETTING_DISCRIMINATING_QUESTION;
             break;
+
         case GETTING_DISCRIMINATING_QUESTION:
             if (user_input==NULL||strcmp("",user_input)==0) {
                 break;
@@ -144,6 +144,7 @@ void update_model(Model* model,char *user_input) {
                 (model->current_node)->animal,"?"  );
             model->state = GETTING_ANSWER_TO_DISCRIMINATING_QUESTION;
             break;
+
         case GETTING_ANSWER_TO_DISCRIMINATING_QUESTION:
             if ((strcmp("no",user_input)!=0)&&(strcmp("yes",user_input)!=0)) {
                 break;
@@ -204,7 +205,6 @@ void rearrange_knowledge_tree(Str_list* yes_no_list,Knowledge_tree* tree,char* n
             tree->yes_branch = make_leaf_node(new_animal_name);
             tree->no_branch = make_leaf_node(tree->animal);
         }
-        return;
     } else {
         if (strcmp(yes_no_list->element,"no")==0) {
             char* old_animal_name = tree->no_branch->animal;
@@ -214,7 +214,6 @@ void rearrange_knowledge_tree(Str_list* yes_no_list,Knowledge_tree* tree,char* n
             rearrange_knowledge_tree(yes_no_list->next,tree->yes_branch,
                 new_discriminating_question,answer_to_new_discriminating_question,new_animal_name);
         }
-        return;
     }
 }
 
