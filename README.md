@@ -1,5 +1,4 @@
-# animal_quiz_ansi_c
-animal_quiz_ansi_c
+# AnimalQuiz kata written in ANSI C
 
 A classic "kata" problem, made in ansi C, applying a model-view-update like approach.
 
