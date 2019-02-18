@@ -18,7 +18,6 @@ is it big?\
 what is the answer to the question 'is it big?' to distinguish a cat from a elephant?\
 no\ 
 let's start again. Think about an animal\
-
 is it big?\
 no\
 is it a cat?\
