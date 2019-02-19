@@ -2,6 +2,8 @@
 
 A classic "kata" problem, made in ansi C, applying a model-view-update like approach.
 
+(note: going to refactor to C++ in this repo: https://github.com/tonyx/animal_quiz_kata_cpp)
+
 A binary tree starts with a single node containing an elephant, and then it try to guess which animal the user is thinking.
 When the guess is incorrect, then the user helps to add the new animal suggesting a question that is needed to distinguish the guessed one with the actual one, so the knoweledge base will increase.
 
