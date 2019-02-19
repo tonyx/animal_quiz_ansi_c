@@ -123,6 +123,7 @@ void update_model(Model* model,char *user_input) {
                 break;
             }
             model->animal_to_be_learned = concatenate_strings(1,user_input);
+            free(model->message_from_engine);
             model->message_from_engine= concatenate_strings(5,"what is the question to distinguish a ",
                    model->animal_to_be_learned," from a ",
                    (model->current_node)->animal,"?");
@@ -136,6 +137,7 @@ void update_model(Model* model,char *user_input) {
             char* discriminating_question_for_learning = concatenate_strings(1,user_input);
             free(model->discriminating_question_for_learning);
             model->discriminating_question_for_learning = discriminating_question_for_learning;
+            free(model->message_from_engine);
             model->message_from_engine=concatenate_strings(7,"what is the answer to the question '",
                 discriminating_question_for_learning,
                 "' to distinguish a ",
