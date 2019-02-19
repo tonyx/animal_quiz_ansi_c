@@ -1,5 +1,5 @@
 typedef struct str_list {
-    char *element;
+    void *element;
     struct str_list* next;
 } Str_list;
 
